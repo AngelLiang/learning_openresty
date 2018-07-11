@@ -1,6 +1,5 @@
 -- from https://github.com/openresty/lua-resty-redis
 
-
 local redis = require "resty.redis"
 local red = redis:new()
 
