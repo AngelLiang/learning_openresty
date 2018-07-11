@@ -36,3 +36,14 @@ openresty -c /home/www/ngx_hello_lua.conf -t
 curl http://127.0.0.1:10000/lua
 ```
 
+## install lua-resty-template
+
+```bash
+mkdir -p lualib/resty
+cd lualib/resty
+wget https://raw.githubusercontent.com/bungle/lua-resty-template/master/lib/resty/template.lua
+
+mkdir html
+cd html
+wget https://raw.githubusercontent.com/bungle/lua-resty-template/master/lib/resty/template/html
+```
