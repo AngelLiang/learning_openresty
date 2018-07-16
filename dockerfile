@@ -5,7 +5,7 @@
 # > docker run -p 127.0.0.1:10000:10000 -ti nginx_app 
 # > docker inspect <CONTAINER ID> | grep IPAddress
 ###############################################################################
-###
+### OS
 
 FROM centos:7
 
@@ -37,13 +37,8 @@ RUN ln -s /usr/bin/python36 /usr/bin/python3
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 get-pip.py
 
-### upgrade pip
-RUN pip3 install -U pip
-# upgrade setuptools
-RUN pip3 install -U setuptools
-
-### pip test
-# CMD ["pip3", "-V"]
+### upgrade pip & setuptools
+RUN python3 -m ensurepip --upgrade
 
 ###############################################################################
 ### install openresty
@@ -83,36 +78,17 @@ RUN rm -rf /tmp/* /var/tmp/*
 RUN mkdir /var/nginx_app
 WORKDIR /var/nginx_app
 
-### install python requirements
-# COPY requirements.txt ./
-# RUN pip install --no-cache-dir -r requirements.txt
-
-
-# RUN pip3 install pipenv
-# COPY Pipfile ./
-# COPY Pipfile.lock ./
-# RUN pipenv install
-# RUN pipenv shell
 
 ###############################################################################
 ### project
 
 COPY . .
-# COPY app ./
-# COPY wsgi.py ./
 
 RUN pip3 install requests
 
-### 环境变量
-# ENV FLASK_ENV=prodection
 
 ### Port to expose
 EXPOSE 10000 10001
-
-# RUN flask initdb
-# RUN export LC_ALL=en_US.utf8 && export LANG=en_US.utf8 && flask run -h 0.0.0.0 -p 5000
-# RUN flask run -h 0.0.0.0 -p 5000
-# ENTRYPOINT ["./gunicorn_bootshrap.sh"]
 
 # CMD flask run -h 0.0.0.0 -p 5000
 # CMD openresty -c /var/nginx_app/ngx_hello_lua.conf
