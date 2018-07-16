@@ -29,9 +29,10 @@ resty -e 'print("hello, world!")'
 ## start
 
 ```bash
-# start
+# check
 openresty -c /home/www/ngx_hello_lua.conf -t
-
+# start
+openresty -c /home/www/ngx_hello_lua.conf
 # test
 curl http://127.0.0.1:10000/lua
 ```
