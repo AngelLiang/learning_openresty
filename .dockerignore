@@ -1,0 +1,6 @@
+.git
+.vscode
+venv
+screenshot
+
+*.sqlite
